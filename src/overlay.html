@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Перевод</title>
+    <link rel="stylesheet" href="./overlay.css" />
+  </head>
+  <body>
+    <main class="card">
+      <section class="pane">
+        <label for="source">Оригинал</label>
+        <textarea id="source" readonly></textarea>
+      </section>
+      <section class="pane">
+        <label for="translated">Перевод</label>
+        <textarea id="translated"></textarea>
+      </section>
+      <footer class="actions">
+        <span class="hint">Esc — закрыть</span>
+        <button id="copy" type="button">Копировать</button>
+      </footer>
+    </main>
+    <script type="module" src="./overlay.js"></script>
+  </body>
+</html>

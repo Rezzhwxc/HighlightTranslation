@@ -1,0 +1,42 @@
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; height: 100%;
+  background: transparent; /* окно прозрачное */
+  font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #e8e8ee;
+  overflow: hidden;
+}
+/* Отступ 20px вокруг карточки — чтобы тень не обрезалась границей окна */
+.card {
+  position: absolute; inset: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr auto;
+  gap: 12px 14px;
+  padding: 16px;
+  background: rgba(24, 24, 30, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(14px);
+}
+.pane { display: flex; flex-direction: column; min-height: 0; gap: 6px; }
+label { font-size: 12px; color: #8b8b9a; text-transform: uppercase; letter-spacing: .06em; }
+textarea {
+  flex: 1; resize: none; padding: 10px 12px;
+  color: inherit; font: inherit;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px; outline: none;
+}
+textarea:focus { border-color: #6b8cff; }
+.actions { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; }
+.hint { font-size: 12px; color: #6f6f7d; }
+button {
+  padding: 8px 20px; border: 0; border-radius: 10px; cursor: pointer;
+  font: inherit; font-weight: 600; color: #fff; background: #4c6fff;
+  transition: background .15s;
+}
+button:hover { background: #6280ff; }
+button:active { background: #3f5ee0; }
