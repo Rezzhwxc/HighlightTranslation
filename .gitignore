@@ -1,0 +1,17 @@
+# Зависимости и сборка фронтенда
+node_modules
+dist
+
+# Сборка Rust / Tauri
+src-tauri/target
+src-tauri/gen
+
+# Архивы и системный мусор
+*.zip
+.DS_Store
+Thumbs.db
+
+# Локальные настройки редактора и логи
+.vscode/
+.idea/
+*.log
