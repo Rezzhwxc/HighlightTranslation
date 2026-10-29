@@ -10,12 +10,13 @@ use tauri::{
     AppHandle, Emitter, Manager, PhysicalPosition, WebviewWindow,
 };
 use tauri_plugin_autostart::MacosLauncher;
+use tauri_plugin_autostart::ManagerExt;
 use tauri_plugin_clipboard_manager::ClipboardExt;
 use tauri_plugin_global_shortcut::{GlobalShortcutExt, ShortcutState};
 use tauri_plugin_http::reqwest;
 
 // Хоткей. Формат: https://v2.tauri.app/plugin/global-shortcut/
-const HOTKEY: &str = "CmdOrCtrl+Shift+T";
+const HOTKEY: &str = "CmdOrCtrl+Shift+Q";
 // Языки перевода: sl — исходный (auto = определить), tl — целевой
 const SOURCE_LANG: &str = "auto";
 const TARGET_LANG: &str = "en";
@@ -308,7 +309,7 @@ fn build_tray(app: &tauri::App) -> tauri::Result<()> {
 
     let mut builder = TrayIconBuilder::new()
         .menu(&menu)
-        .tooltip("Переводчик (Ctrl+Shift+T)");
+        .tooltip("Переводчик (Ctrl+Shift+Q)"); // можете изменять под себя
     if let Some(icon) = app.default_window_icon() {
         builder = builder.icon(icon.clone());
     }
@@ -349,6 +350,21 @@ pub fn run() {
             }
             if let Err(e) = app.global_shortcut().register(HOTKEY) {
                 eprintln!("не удалось зарегистрировать хоткей {HOTKEY}: {e}");
+            }
+            // Автозапуск только в релизной сборке: в dev он зарегистрировал бы
+            // debug-exe, который не работает без Vite и пропадёт после очистки target
+            #[cfg(not(debug_assertions))]
+            {
+                let autolaunch = app.autolaunch();
+                match autolaunch.is_enabled() {
+                    Ok(true) => {}
+                    Ok(false) => {
+                        if let Err(e) = autolaunch.enable() {
+                            eprintln!("не удалось включить автозапуск: {e}");
+                        }
+                    }
+                    Err(e) => eprintln!("не удалось проверить автозапуск: {e}"),
+                }
             }
             Ok(())
         })
