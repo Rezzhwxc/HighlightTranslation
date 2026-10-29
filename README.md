@@ -1,4 +1,4 @@
-# RuEnTranslator
+# Highlight text translator
 
 Фоновый переводчик выделенного текста: выделить → `Ctrl+Shift+T` (`Cmd+Shift+T` на macOS) → оверлей с переводом. Стек: Rust + Tauri v2 + чистый JS (Vite используется только как сборщик).
 
